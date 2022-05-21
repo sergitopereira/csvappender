@@ -8,8 +8,13 @@ test dir has file: example_test_data.csv
 
 # Installation Instructions
 
-1. Download the binary from git
+Download the binary from git
+
+OPTION 1: 
 wget https://raw.githubusercontent.com/sergitopereira/csvappender/master/fileappender
+
+OPTION 2:
+curl -O https://github.com/sergitopereira/csvappender/blob/master/fileappender
 
 
 
