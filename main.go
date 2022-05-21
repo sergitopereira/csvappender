@@ -37,8 +37,6 @@ func append_csv(test_file string, prod_file string) {
 	if err != nil {
 		log.Fatalf("unable to read file: %v", err)
 	}
-	fmt.Println(string(body))
-
 	f, err := os.OpenFile(prod_file, os.O_WRONLY|os.O_APPEND, 0664)
 	if err != nil {
 		log.Fatal(err)
