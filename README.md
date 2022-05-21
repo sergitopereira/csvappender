@@ -1,4 +1,4 @@
-# csvappender
+# fileappender
 Combines files from two directories. Test directories must have the  same filename with sufix _test_data
 
 Example
@@ -8,9 +8,10 @@ test dir has file: example_test_data.csv
 
 # Installation Instructions
 
-Download the binary from git
-wget 
-curl -LO 
+1. Download the binary from git
+wget https://raw.githubusercontent.com/sergitopereira/csvappender/master/fileappender
+
+
 
 # usage
 ```golang
@@ -18,3 +19,8 @@ curl -LO
 .\fileappender /Users/spereira/Documents/test /Users/spereira/Documents/prod
 
 ```
+
+# Author 
+Sergio Pereira 
+
+
