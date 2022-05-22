@@ -25,7 +25,7 @@ curl -O https://github.com/sergitopereira/csvappender/blob/master/csvappender.ex
 ```
 # Logs
 
-Logs are stroes in logs.txt file.
+Logs are saved in logs.txt file.
 
 # Author 
 Sergio Pereira 
