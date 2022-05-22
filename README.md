@@ -11,7 +11,7 @@ test dir has file: example_test_data.csv
 Download the binary from git
 
 OPTION 1: 
-wget https://raw.githubusercontent.com/sergitopereira/csvappender/master/csvappender.exe
+wget -O csvappender https://raw.githubusercontent.com/sergitopereira/csvappender/master/csvappender.exe
 
 OPTION 2:
 curl -O https://github.com/sergitopereira/csvappender/blob/master/csvappender.exe
