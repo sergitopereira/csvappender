@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
+	"github.com/sergitopereira/csvappender/helpers"
 	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
-	"github.com/sergitopereira/csvappender/helpers"
 )
 
-func dest_files(dest_path string) map[string]int {
+func find_files(path string) map[string]int {
 
 	//return a map with files in destination path and value counter
-	dst_files, err := ioutil.ReadDir(dest_path)
+	dst_files, err := ioutil.ReadDir(path)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,33 +43,43 @@ func append_csv(test_file string, prod_file string) {
 	}
 	f.WriteString("\n")
 	f.WriteString(string(body))
-	return
 }
 
 func main() {
 	args := os.Args
 	helpers.TerminalHelper(args)
+    // start logger
+	log_file, err := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.SetOutput(log_file)
+	log.Printf("Start csvappender v1.0")
 	test_files, err := ioutil.ReadDir(args[1])
 	if err != nil {
 		log.Fatal(err)
 	}
-	m := dest_files(args[2])
-
+	m := find_files(args[2])
+	log.Println("-> "+args[2]+ " has the following files:"  )
+	log.Println(m)
+	log.Println("-> "+args[1]+ " has the following files:"  )
+	log.Println(find_files(args[1]))
 	for _, file := range test_files {
 		if file.IsDir() {
 			continue
 		} else {
-
 			test := regexp.MustCompile("_test_data(.csv)?$")
 			res := test.ReplaceAllString(file.Name(), "")
-			fmt.Println(res + ".csv")
+			//fmt.Println(res + ".csv")
 			_, ok := m[res+".csv"]
 			if ok {
 				test_path := args[1] + "/" + file.Name()
-				prod_path := args[2] + "/" + res+".csv"
-				append_csv(test_path, prod_path )
+				prod_path := args[2] + "/" + res + ".csv"
+				append_csv(test_path, prod_path)
+				log.Println("->" + prod_path + " has been appended with contents of " + test_path)
 			}
 		}
 	}
-	fmt.Println("completed")
+	log.Println("End csvappender")
+	fmt.Println("Files were successfully appended. Review logs.txt")
 }
